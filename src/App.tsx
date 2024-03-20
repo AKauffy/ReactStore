@@ -4,23 +4,8 @@ import './App.css';
 import { RouterProvider, createBrowserRouter, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useEffect, useRef, useState, createContext, useContext, useCallback } from 'react'
-
-interface user {
-  name: string;
-  email: string;
-  picture: string;
-}
-
-interface post {
-  title: string;
-  body: string;
-}
-
-interface AuthContextType {
-  user: user | null;
-  loggedIn: boolean | null;
-  checkLoginState: () => Promise<void>; // Assuming checkLoginState returns a Promise<void>
-}
+import { user, AuthContextType, post } from './types';
+import LandingPage from './Pages/landingPage';
 
 const authContext =  {
   user: null,
@@ -31,10 +16,10 @@ const authContext =  {
 // Ensures cookie is sent
 axios.defaults.withCredentials = true
 
-const serverUrl = 'http://localhost:5000';
+export const serverUrl = 'http://localhost:5000';
 
 
-const AuthContext = createContext<AuthContextType>(authContext);
+export const AuthContext: React.Context<AuthContextType> = createContext<AuthContextType>(authContext);
 
 const AuthContextProvider: React.FC<{children: ReactNode}> = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(null)
@@ -85,7 +70,8 @@ const Dashboard: React.FC = () => {
       checkLoginState()
     } catch (err) {
       console.error(err)
-    }
+    };
+
   }
 
   return (
@@ -163,7 +149,7 @@ const Callback = () => {
 
 const Home = () => {
   const { loggedIn } = useContext(AuthContext)
-  if (loggedIn === true) return <Dashboard />
+  if (loggedIn === true) return <LandingPage />
   if (loggedIn === false) return <Login />
   return <></>
 }
