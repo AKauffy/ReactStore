@@ -6,6 +6,7 @@ import axios from 'axios'
 import { useEffect, useRef, useState, createContext, useContext, useCallback } from 'react'
 import { user, AuthContextType, post } from './types';
 import LandingPage from './Pages/landingPage';
+import { Login } from './Pages/Login';
 
 const authContext =  {
   user: null,
@@ -98,29 +99,6 @@ const Dashboard: React.FC = () => {
   )
 }
 
-const Login = () => {
-  const handleLogin = async () => {
-    try {
-      // Gets authentication url from backend server
-      const {
-        data: { url },
-      } = await axios.get(`${serverUrl}/auth/url`)
-      // Navigate to consent screen
-      window.location.assign(url)
-    } catch (err) {
-      console.error(err)
-    }
-  }
-  return (
-    <>
-      <h3>Login to Dashboard</h3>
-      <button className="btn" onClick={handleLogin}>
-        Login
-      </button>
-    </>
-  )
-}
-
 const Callback = () => {
   const called = useRef(false)
   const { checkLoginState, loggedIn } = useContext(AuthContext)
@@ -169,8 +147,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <header className="App-header position-relative">
         <AuthContextProvider>
           <RouterProvider router={router} />
         </AuthContextProvider>

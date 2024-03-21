@@ -9,6 +9,7 @@ import axios from 'axios'
 
 const LandingPage: React.FC = () => {
 
+
     return (
         <div>
             <NavBar></NavBar>
