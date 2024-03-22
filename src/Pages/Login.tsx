@@ -23,11 +23,11 @@ export const Login = () => {
 
   return (
     <>
-    <div className='position-absolute row'style={{ backgroundColor: 'white' }}>
+    <div className='justify-content-center align-items-center position-absolute row rounded'style={{ backgroundColor: 'white' }}>
       <h3 className='text-dark mb-3'>Login</h3>
       <form >
         <div className="form-group ms-2 me-2 col-auto" >
-          <label htmlFor="exampleInputEmail1" className='text-start text-dark'>Email address</label>
+          <label htmlFor="exampleInputEmail1" className='text-dark'>Email address</label>
           <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" onChange={e => setEmail(e.target.value)}></input>
         </div>
         <div className="form-group ms-2 me-2 col-auto">

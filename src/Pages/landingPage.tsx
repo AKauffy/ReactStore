@@ -12,7 +12,9 @@ const LandingPage: React.FC = () => {
 
     return (
         <div>
-            <NavBar></NavBar>
+            <div className="top-0">
+                <NavBar></NavBar>
+            </div>
         </div>
     );
 }

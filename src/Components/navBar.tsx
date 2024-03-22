@@ -1,24 +1,56 @@
+import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import { ReactComponent as Brand } from '../assets/icons/logo.svg'
+import './navbar.css'
 
-import { user, AuthContextType } from '../types';
-import { useContext } from 'react';
-import { AuthContext } from '../App';
+const Navbar: React.FC = () => {
+  const [showNavbar, setShowNavbar] = useState(false)
 
+  const handleShowNavbar = () => {
+    setShowNavbar(!showNavbar)
+  }
 
-const NavBar: React.FC = () => {
-    const {loggedIn, checkLoginState, user } = useContext<AuthContextType>(AuthContext);
+  return (
+    <nav className="navbar">
+      <div className="container">
+        <div className="logo pb-3">
+          <Brand />
+        </div>
+        <div className="menu-icon" onClick={handleShowNavbar}>
 
-    return (
-        <>
-        <nav className="navbar navbar-light bg-light justify-content-between">
-            <a className="navbar-brand">Jade's Oysters</a>
-            <form className="form-inline">
-                <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
-                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-            <a>{user?.name}</a>
-        </nav>
-        </>
-    )
+        </div>
+        <div className={`nav-elements  ${showNavbar && 'active'}`}>
+          <ul>
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/products">Products</NavLink>
+            </li>
+            <li>
+              <NavLink to="/about">About</NavLink>
+            </li>
+            <li>
+              <NavLink to="/profile">Profile</NavLink>
+            </li>
+            <li>
+              <NavLink to="/contact">Contact</NavLink>
+            </li>
+            <li>
+            <div className="container d-flex flex-column mt-0">
+                <div className='row'>
+                    <NavLink to="/account">Account</NavLink>
+                </div>
+                <div className='row'>
+                    <NavLink to="/cart">Cart</NavLink>
+                </div>
+            </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  )
 }
 
-export default NavBar;
+export default Navbar
